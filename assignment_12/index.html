@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Management App</title>
+</head>
+<body>
+  <div id="app">
+    <div>
+      <h2>All Tasks</h2>
+      <ul>
+        <li v-for="task in tasks" :key="task.id">
+          {{ task.title }} - {{ task.completed ? 'Completed' : 'Incomplete' }}
+          <button @click="toggleCompletion(task)">Toggle Completion</button>
+        </li>
+      </ul>
+    
+      <h2>Incomplete Tasks</h2>
+      <ul>
+        <li v-for="task in incompleteTasks" :key="task.id">
+          {{ task.title }} - Incomplete
+          <button @click="toggleCompletion(task)">Mark Complete</button>
+        </li>
+      </ul>
+    
+      <h2>Completed Tasks</h2>
+      <ul>
+        <li v-for="task in completedTasks" :key="task.id">
+          {{ task.title }} - Completed
+          <button @click="toggleCompletion(task)">Mark Incomplete</button>
+        </li>
+      </ul>
+    
+      <form @submit.prevent="addTask">
+        <label for="title">Task Title:</label>
+        <input v-model="newTask.title" type="text" required />
+    
+        <label for="completed">Completed:</label>
+        <input v-model="newTask.completed" type="checkbox" />
+    
+        <button type="submit">Add Task</button>
+      </form>
+    
+      <p>Total Incomplete Tasks: {{ incompleteTasks.length }}</p>
+      <p>Total Completed Tasks: {{ completedTasks.length }}</p>
+    </div>
+  </div>
+  <script src="/main/main.js"></script>
+</body>
+</html>

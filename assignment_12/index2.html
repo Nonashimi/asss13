@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile Dashboard</title>
+  <link rel="stylesheet" href="/css/sss.css">
+</head>
+<body>
+  <div id="app">
+<div>
+    <h1>User Profile Dashboard</h1>
+  
+    <div v-if="!editingProfile">
+      <img src="/photo_2023-11-29_08-31-06.jpg" alt="Profile Picture" style="max-width: 150px" />
+      <h2>{{ user.name }}</h2>
+      <p>Email: {{ user.email }}</p>
+      <p v-if="user.isAdmin">You are an admin.</p>
+      <p v-else>You are a regular user.</p>
+      <p>Age: {{ age }}</p>
+      <button @click="toggleEdit">Edit Profile</button>
+    </div>
+  
+    <div v-else>
+      <h2>Edit Profile</h2>
+      <form @submit.prevent="toggleEdit">
+        <label for="name">Name:</label>
+        <input v-model="editedUser.name" type="text" required />
+  
+        <label for="email">Email:</label>
+        <input v-model="editedUser.email" type="email" required />
+  
+        <label for="birthdate">Birthdate:</label>
+        <input v-model="editedUser.birthdate" type="date" required />
+  
+        <label for="profilePicture">Profile Picture:</label>
+        <input @change="handlePictureChange" type="file" accept="image/*" />
+  
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+  
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="./main/app.js"></script>
+</body>
+</html>
